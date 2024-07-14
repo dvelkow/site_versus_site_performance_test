@@ -1,0 +1,13 @@
+{
+    "window_size": 20,
+    "threshold": 2.0,
+    "metrics": [
+        "page_load_time",
+        "time_to_first_byte",
+        "first_contentful_paint"
+    ],
+    "urls": {
+        "olxbg": "https://olx.bg",
+        "optimatex": "https://optimatex.co"
+    }
+}
