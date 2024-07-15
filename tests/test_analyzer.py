@@ -53,7 +53,7 @@ def test_anomaly_detector(sample_config):
     history = {
         "production_page_load_time": [2.0, 2.1, 2.2, 2.0, 2.1]
     }
-    new_metrics = {"page_load_time": 5.0}
+    new_metrics = {"page_load_time": 1.0}
     
     anomalies = detector.detect_anomalies(history, new_metrics, "production")
     assert anomalies["page_load_time"] == True

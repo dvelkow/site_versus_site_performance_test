@@ -1,21 +1,22 @@
 import matplotlib.pyplot as plt
-from typing import List
+from typing import Dict, List
 
 class Visualizer:
-    def plot_metric_trend(self, metric_values: List[float], metric_name: str, environment: str, output_file: str):
-        plt.figure(figsize=(10, 6))
-        plt.plot(metric_values, marker='o')
-        plt.title(f"{metric_name.replace('_', ' ').title()} Trend - {environment.capitalize()}")
+    def plot_metric_comparison(self, metric_data: Dict[str, List[float]], metric_name: str, output_file: str):
+        plt.figure(figsize=(12, 6))
+        
+        for site, values in metric_data.items():
+            plt.plot(values, marker='o', label=site.capitalize())
+        
+        plt.title(f"{metric_name.replace('_', ' ').title()} Comparison")
         plt.ylabel(metric_name.replace('_', ' ').title())
         plt.xlabel("Test Run")
+        plt.legend(loc='best')
         plt.grid(True, linestyle='--', alpha=0.7)
         
-        # Add value labels
-        for i, v in enumerate(metric_values):
-            plt.text(i, v, f'{v:.2f}', ha='center', va='bottom', fontweight='bold')
-        
-        # Highlight the last point
-        plt.plot(len(metric_values)-1, metric_values[-1], 'ro', markersize=10)
+        # Highlight the last points
+        for site, values in metric_data.items():
+            plt.plot(len(values)-1, values[-1], 'ro', markersize=8)
         
         plt.tight_layout()
         plt.savefig(output_file, dpi=300, bbox_inches='tight')
